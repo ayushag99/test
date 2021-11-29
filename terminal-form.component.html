@@ -1,0 +1,115 @@
+<h2>{{ isCreating ? "Register Terminal" : "Update Terminal" }}</h2>
+<form [formGroup]="terminalForm" (ngSubmit)="onSubmit()">
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Terminal Name</mat-label>
+    <input
+      matInput
+      type="text"
+      id="terminalName"
+      formControlName="terminalName"
+    />
+    <mat-error *ngIf="!terminalForm.get('terminalName')!.valid">
+      Please enter a valid Terminal Name
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Item Type</mat-label>
+    <input matInput type="text" id="itemType" formControlName="itemType" />
+    <mat-error *ngIf="!terminalForm.get('itemType')!.valid">
+      Please enter a valid Item Type
+    </mat-error>
+  </mat-form-field>
+
+  <table>
+    <tr>
+      <td>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Country</mat-label>
+          <input matInput type="text" id="country" formControlName="country" />
+          <mat-error *ngIf="!terminalForm.get('country')!.valid">
+            Please enter a valid Country
+          </mat-error>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Harbor Location</mat-label>
+          <input
+            matInput
+            type="text"
+            id="harborLocation"
+            formControlName="harborLocation"
+          />
+          <mat-error *ngIf="!terminalForm.get('harborLocation')!.valid">
+            Please enter a valid Harbor Location
+          </mat-error>
+        </mat-form-field>
+      </td>
+    </tr>
+  </table>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Terminal Description</mat-label>
+
+    <textarea
+      matInput
+      type="text"
+      id="terminalDescription"
+      formControlName="terminalDescription"
+    ></textarea>
+    <mat-error *ngIf="!terminalForm.get('terminalDescription')!.valid">
+      Please enter a valid Terminal Description
+    </mat-error>
+  </mat-form-field>
+  <table>
+    <tr>
+      <td>
+        <!-- <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Item Type</mat-label>
+          <input
+            matInput
+            type="text"
+            id="itemType"
+            formControlName="itemType"
+          />
+          <mat-error *ngIf="!terminalForm.get('itemType')!.valid">
+            Please enter a valid Harbor Location
+          </mat-error>
+        </mat-form-field> -->
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Status</mat-label>
+          <mat-select formControlName="status">
+            <mat-option *ngFor="let tp of itemTypes" [value]="tp">
+              {{ tp }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="!terminalForm.get('status')!.valid">
+            Please enter a valid Status
+          </mat-error>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Capacity</mat-label>
+          <input
+            matInput
+            type="number"
+            id="capacity"
+            formControlName="capacity"
+          />
+          <mat-error *ngIf="!terminalForm.get('capacity')!.valid">
+            Please enter a Capacity
+          </mat-error>
+        </mat-form-field>
+      </td>
+    </tr>
+  </table>
+  <button
+    type="submit"
+    class="btn btn-primary"
+    [disabled]="!terminalForm.valid"
+  >
+    {{ isCreating ? "Register" : "Update" }}
+  </button>
+  <p *ngIf="successMessage != ''">{{ successMessage }}</p>
+  <p *ngIf="errorMessage != ''">{{ errorMessage }}</p>
+</form>
