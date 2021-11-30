@@ -11,6 +11,8 @@ import { WorkitemInterface } from '../../../models/interface/WorkitemInterface';
   styleUrls: ['./work-item-form.component.css'],
 })
 export class WorkItemFormComponent implements OnInit {
+  succesMessage:string=""
+  errorMessage:string=""
   workItem: WorkitemInterface | null = null;
   workItemForm!: FormGroup;
   isCreating = true;
@@ -36,13 +38,13 @@ export class WorkItemFormComponent implements OnInit {
     }
 
     this.workItemForm = new FormGroup({
-      userId: new FormControl(this.workItem ? this.workItem.userId : '', [
-        Validators.required,
-      ]),
-      workItemId: new FormControl(
-        this.workItem ? this.workItem.workItemId : '',
-        [Validators.required]
-      ),
+      // userId: new FormControl(this.workItem ? this.workItem.userId : '', [
+      //   Validators.required,
+      // ]),
+      // workItemId: new FormControl(
+      //   this.workItem ? this.workItem.workItemId : '',
+      //   [Validators.required]
+      // ),
       itemName: new FormControl(this.workItem ? this.workItem.itemName : '', [
         Validators.required,
       ]),
@@ -87,6 +89,7 @@ export class WorkItemFormComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log(this.workItemForm)
     let workItem = new WorkItem();
     workItem.userId = this.workItemForm.get('userId')?.value;
     workItem.workItemId = this.workItemForm.get('workItemId')?.value;
@@ -112,6 +115,11 @@ export class WorkItemFormComponent implements OnInit {
     if (this.isCreating) {
       this.workItemService.createWorkItem(workItem).subscribe((respones) => {
         console.log(respones);
+        this.succesMessage = (respones as {message:string}).message
+        console.log(this.succesMessage)
+        
+      },err=>{
+        this.errorMessage = "Some Error Occured, Please try again"
       });
     } else {
       this.workItemService.updateWorkItem(workItem).subscribe((respose) => {

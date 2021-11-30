@@ -71,10 +71,10 @@
                 <mat-icon>edit</mat-icon>
                 <span>Edit</span>
               </button>
-              <!-- <button mat-menu-item (click)="deleteWorkItem(row.workItemId)">
+              <button mat-menu-item (click)="deleteVehicle(row.vehicleNumber)">
                 <mat-icon>delete</mat-icon>
                 <span style="color: red">Delete</span>
-              </button> -->
+              </button>
               <!-- <button mat-menu-item disabled>
               <mat-icon>voicemail</mat-icon>
               <span>Check voice mail</span>
@@ -108,7 +108,7 @@
       </div>
     </div>
   </mat-tab>
-  <mat-tab label="Update"
+  <mat-tab label="Update" disabled
     ><div class="page">
       <div>
         <img src="../../../../assets/vehicle.svg" alt="" />

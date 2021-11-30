@@ -14,9 +14,9 @@ export class TerminalFormComponent implements OnInit, OnChanges {
   terminalForm!: FormGroup;
   successMessage: string = '';
   errorMessage: string = '';
-  itemTypes = [ "Available", "Not Available"];
+  itemTypes = ['Available', 'Not Available'];
   constructor(private terminalService: TerminalService) {
-    this.terminal={}
+    this.terminal = {};
   }
 
   ngOnInit(): void {
@@ -30,20 +30,18 @@ export class TerminalFormComponent implements OnInit, OnChanges {
     this.terminalForm = new FormGroup({
       terminalName: new FormControl(
         this.terminal ? this.terminal.terminalName : '',
-        [Validators.required]
+        [Validators.required,Validators.minLength(3),Validators.maxLength(20)]
       ),
 
-      country: new FormControl(this.terminal ? this.terminal.country : '', [
-        Validators.required,
-      ]),
+      country: new FormControl(this.terminal ? this.terminal.country : '', [Validators.required,Validators.min(3),Validators.max(20)]),
 
       itemType: new FormControl(this.terminal ? this.terminal.itemType : '', [
-        Validators.required,
+        Validators.required,Validators.minLength(4),Validators.maxLength(30)
       ]),
 
       terminalDescription: new FormControl(
         this.terminal ? this.terminal.terminalDescription : '',
-        [Validators.required]
+        [Validators.required,Validators.max(25)]
       ),
 
       capacity: new FormControl(this.terminal ? this.terminal.capacity : '', [
@@ -52,7 +50,7 @@ export class TerminalFormComponent implements OnInit, OnChanges {
 
       harborLocation: new FormControl(
         this.terminal ? this.terminal.harborLocation : '',
-        [Validators.required]
+        [Validators.required,Validators.min(5),Validators.max(25)]
       ),
       status: new FormControl(this.terminal ? this.terminal.status : '', [
         Validators.required,
@@ -71,9 +69,12 @@ export class TerminalFormComponent implements OnInit, OnChanges {
     this.ngOnInit();
   }
   onSubmit() {
-    let oldTerminal = this.terminal
-    this.terminal = {}
-    this.terminal.terminalId =oldTerminal!.terminalId
+    console.log(this.terminalForm)
+    this.errorMessage=""
+    this.successMessage=""
+    let oldTerminal = this.terminal;
+    this.terminal = {};
+    this.terminal.terminalId = oldTerminal!.terminalId;
     this.terminal.terminalId = this.terminalForm.get('terminalId')?.value;
 
     this.terminal.terminalName = this.terminalForm.get('terminalName')?.value;
@@ -96,11 +97,15 @@ export class TerminalFormComponent implements OnInit, OnChanges {
     this.terminal.harborLocation =
       this.terminalForm.get('harborLocation')?.value;
     if (this.isCreating) {
-      this.terminalService
-        .createTerminal(this.terminal)
-        .subscribe((response) => {
+      this.terminalService.createTerminal(this.terminal).subscribe(
+        (response) => {
+          this.successMessage = (response as { message: string }).message;
           this.ngOnInit();
-        });
+        },
+        (err) => {
+          this.errorMessage = 'Some Error Occured, Please try again';
+        }
+      );
     } else {
       this.terminalService
         .updateTerminal(

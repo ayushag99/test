@@ -1,6 +1,6 @@
 <h2>{{ isCreating ? "Register Vehicle" : "Update Vehicle" }}</h2>
 <form [formGroup]="vehicleForm" (ngSubmit)="onSubmit()">
-  <mat-form-field class="example-full-width" appearance="fill">
+  <!-- <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>Vehicle Name</mat-label>
     <input
       matInput
@@ -11,7 +11,21 @@
     <mat-error *ngIf="!vehicleForm.get('vehicleName')!.valid">
       Please enter a valid Vehicle Name
     </mat-error>
+  </mat-form-field> -->
+
+
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Vehicle Name</mat-label>
+    <mat-select formControlName="vehicleName">
+      <mat-option *ngFor="let stat of name" [value]="stat">
+        {{ stat }}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="!vehicleForm.get('vehicleName')!.valid">
+      Please enter a valid Vehicle Name
+    </mat-error>
   </mat-form-field>
+
   <table>
     <tr>
       <td>
@@ -81,7 +95,7 @@
         </mat-form-field> -->
 
         <mat-form-field class="example-full-width" appearance="fill">
-          <mat-label>Vehicle</mat-label>
+          <mat-label>Vehicle Status</mat-label>
           <mat-select formControlName="vehicleStatus">
             <mat-option *ngFor="let stat of status" [value]="stat">
               {{ stat }}

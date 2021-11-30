@@ -8,9 +8,17 @@
       id="terminalName"
       formControlName="terminalName"
     />
-    <mat-error *ngIf="!terminalForm.get('terminalName')!.valid">
+    <mat-error *ngIf="terminalForm!.controls['terminalName'].errors && terminalForm!.controls['terminalName'].errors['required']" >
       Please enter a valid Terminal Name
     </mat-error>
+    <mat-error *ngIf="terminalForm!.controls['terminalName'].errors && terminalForm!.controls['terminalName'].errors['minlength']" >
+     Minimum Length should be 3
+    </mat-error>
+    <mat-error *ngIf="terminalForm!.controls['terminalName'].errors && terminalForm!.controls['terminalName'].errors['maxlength']" >
+     Maximum Length should be 3
+    </mat-error>
+
+    
   </mat-form-field>
   <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>Item Type</mat-label>
@@ -18,6 +26,7 @@
     <mat-error *ngIf="!terminalForm.get('itemType')!.valid">
       Please enter a valid Item Type
     </mat-error>
+
   </mat-form-field>
 
   <table>
@@ -106,7 +115,6 @@
   <button
     type="submit"
     class="btn btn-primary"
-    [disabled]="!terminalForm.valid"
   >
     {{ isCreating ? "Register" : "Update" }}
   </button>

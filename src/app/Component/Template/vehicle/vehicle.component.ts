@@ -57,5 +57,10 @@ export class VehicleComponent implements OnInit {
       this.ngOnInit()
     });
   }
+  deleteVehicle(vehicleNumber:any){
+    this.vehicleService.deleteVehicle(vehicleNumber).subscribe(response=>{
+      this.ngOnInit()
+    })
+  }
 
 }

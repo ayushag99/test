@@ -24,7 +24,7 @@ const ServerConfig = {
       `${VEHICLE_SERVER}/${vehicleNumber}`,
     fetchVehicleDetailsByVehicleName: (vehicleName: any) =>
       `${VEHICLE_SERVER}/managed-name/${vehicleName}`,
-    removeVehicle: (vehicleNumber: any) => `${VEHICLE_SERVER}${vehicleNumber}`,
+    removeVehicle: (vehicleNumber: any) => `${VEHICLE_SERVER}/${vehicleNumber}`,
     fetchVehicleDetailsByVehicleNumber: (vehicleNumber: any) =>
       `${VEHICLE_SERVER}/managed-number/${vehicleNumber}`,
   },

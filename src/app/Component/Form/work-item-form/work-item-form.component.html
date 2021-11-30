@@ -196,7 +196,13 @@
     </tr>
   </table>
 
-  <button type="submit" class="btn btn-primary" [disabled]="!workItemForm.valid">
+  <button
+    type="submit"
+    class="btn btn-primary"
+    [disabled]="!workItemForm.valid"
+  >
     {{ isCreating ? "Create" : "Update" }}
   </button>
+  <p *ngIf="succesMessage!=''">{{ succesMessage }}</p>
+  <p *ngIf="errorMessage!=''">{{ errorMessage }}</p>
 </form>

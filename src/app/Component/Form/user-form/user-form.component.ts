@@ -58,7 +58,7 @@ export class UserFormComponent implements OnInit {
       ),
       personal_identification_number: new FormControl(
         this.user ? this.user.personal_identification_number : '',
-        [Validators.required]
+        [Validators.required,Validators.minLength(12),Validators.maxLength(12)]
       ),
     });
     this.userForm.controls['user_id'].disable();

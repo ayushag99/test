@@ -67,4 +67,10 @@ export class TerminalComponent implements OnInit {
       this.ngOnInit()
     });
   }
+  deleteTerminal(terminalId:string){
+    this.terminalService.deleteTerminal(terminalId).subscribe(response=>{
+      console.log(response)
+      this.ngOnInit
+    })
+  }
 }

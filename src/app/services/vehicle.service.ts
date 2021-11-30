@@ -27,6 +27,9 @@ export class VehicleService {
   createVehicle(vehicle: VehicleInterface) {
     return this.http.post(ServerConfig.vehicle.insertNewVehicle(), {...vehicle,retireDate:formatDate(vehicle.retireDate)});
   }
+  deleteVehicle(vehicleNumber:any){
+    return this.http.delete(ServerConfig.vehicle.removeVehicle(vehicleNumber))
+  }
 }
 
 function formatDate(date:any) {

@@ -12,23 +12,38 @@ export class VehicleFormComponent implements OnInit, OnChanges {
   @Input() vehicle!: VehicleInterface | null;
   @Input() isCreating = true;
   status = ['Active', 'Retired', 'InProgress'];
+  name = [
+    'Tower crane',
+    'FirePlace Crane',
+    'Double treadwheel Crane',
+    'Crawler Crane',
+    'Aerial Crane',
+    'Deck Crane',
+  ];
   vehicleForm!: FormGroup;
   errorMessage: string = '';
   successMessage: string = '';
   constructor(private vehicleService: VehicleService) {}
 
   ngOnInit(): void {
+    this.errorMessage = '';
+    this.successMessage = '';
     // if (!this.vehicle) {
     //   this.isCreating = true;
     // }
     this.vehicleForm = new FormGroup({
       vehicleNumber: new FormControl(
         this.vehicle ? this.vehicle.vehicleNumber : '',
-        [Validators.required]
+        [
+          Validators.required,
+          Validators.min(6),
+          Validators.max(6),
+          Validators.pattern('[a-zA-z]{2}[0-9]{4}'),
+        ]
       ),
       vehicleName: new FormControl(
         this.vehicle ? this.vehicle.vehicleName : '',
-        [Validators.required]
+        [Validators.required, Validators.max(30)]
       ),
       maxLiftingCapacity: new FormControl(
         this.vehicle ? this.vehicle.maxLiftingCapacity : '',
@@ -43,10 +58,13 @@ export class VehicleFormComponent implements OnInit, OnChanges {
       ),
       country: new FormControl(this.vehicle ? this.vehicle.country : '', [
         Validators.required,
+
+        Validators.min(5),
+        Validators.max(25),
       ]),
       harborLocation: new FormControl(
         this.vehicle ? this.vehicle.harborLocation : '',
-        [Validators.required]
+        [Validators.required, Validators.min(5), Validators.max(25)]
       ),
     });
     if (this.isCreating == false) {
@@ -78,6 +96,7 @@ export class VehicleFormComponent implements OnInit, OnChanges {
     if (this.isCreating) {
       this.vehicleService.createVehicle(this.vehicle).subscribe(
         (response) => {
+          console.log(response);
           this.successMessage = (response as { message: string }).message;
           this.ngOnInit();
         },
@@ -93,6 +112,7 @@ export class VehicleFormComponent implements OnInit, OnChanges {
         )
         .subscribe(
           (response) => {
+            console.log(response);
             this.successMessage = (response as { message: string }).message;
             this.ngOnInit();
           },
@@ -102,4 +122,5 @@ export class VehicleFormComponent implements OnInit, OnChanges {
         );
     }
   }
+  
 }
