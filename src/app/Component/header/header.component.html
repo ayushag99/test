@@ -1,0 +1,34 @@
+<header>
+  <div class="menu container">
+    <nav>
+      <ul>
+        <li>
+          <a href=""> <img src="../../../assets/anchor.png" alt="" /> </a>
+        </li>
+        <li *ngIf="isLoggedIn">
+          <a class="link" routerLink="admin/dashboard" *ngIf="isAdmin">Dashboard</a>
+          <a class="link" routerLink="dashboard" *ngIf="!isAdmin">Dashboard</a>
+        </li>
+      </ul>
+    </nav>
+    <nav>
+      <ul *ngIf="!isLoggedIn">
+        <li><a routerLink="admin"  class="link">Admin</a></li>
+        <li><a routerLink="login" class="link">Login</a></li>
+        <li><a routerLink="register" class="link">Register</a></li>
+      </ul>
+
+      <ul *ngIf="isLoggedIn">
+        <li><a class="link" routerLink="admin/dashboard/vehicle" *ngIf="isAdmin">Vehicle</a></li>
+        <li><a class="link" routerLink="admin/dashboard/terminal" *ngIf="isAdmin">Terminal</a></li>
+        <!-- <li><a class="link" routerLink="admin/dashboard/Terminal" *ngIf="isAdmin">Termiinal</a></li> -->
+        
+        
+        <li><a class="link" routerLink="dashboard/workitem" *ngIf="!isAdmin">Add WorkItem</a></li>
+        <li><a class="link" routerLink="dashboard/profile" *ngIf="!isAdmin">Profile</a></li>
+
+        <li><a class="link" (click)="logout()">Logout</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>

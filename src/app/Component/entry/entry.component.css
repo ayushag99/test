@@ -1,0 +1,33 @@
+.entry {
+}
+.subcontainer {
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.subcontainer > div {
+  width: 40%;
+
+  /* overflow: hidden; */
+}
+.imgage-container img {
+  width: 100%;
+  object-fit: contain;
+}
+
+.form-container {
+  max-height: 70%;
+  overflow-y: scroll;
+}
+
+.form-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.form-container {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}

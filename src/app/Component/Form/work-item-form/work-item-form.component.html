@@ -1,0 +1,202 @@
+<h2>{{ isCreating ? "Create Workitem" : "Update Workitem" }}</h2>
+<form [formGroup]="workItemForm" (ngSubmit)="onSubmit()">
+  <!-- <table>
+    <tr>
+      <td>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>User Id</mat-label>
+          <input matInput type="text" id="userId" formControlName="userId" />
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Workitem Id</mat-label>
+          <input
+            matInput
+            type="text"
+            id="workItemId"
+            formControlName="workItemId"
+          />
+        </mat-form-field>
+      </td>
+    </tr>
+  </table> -->
+
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Item Name</mat-label>
+    <!-- <label for="first_name" class="form-label">First Name</label> -->
+    <input matInput type="text" id="itemName" formControlName="itemName" />
+    <mat-error *ngIf="!workItemForm.get('itemName')!.valid">
+      Please enter a valid Item Name
+    </mat-error>
+  </mat-form-field>
+
+  <table>
+    <tr>
+      <td>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Item Type</mat-label>
+          <!-- <label for="first_name" class="form-label">First Name</label> -->
+          <input
+            matInput
+            type="text"
+            id="itemType"
+            formControlName="itemType"
+          />
+          <mat-error *ngIf="!workItemForm.get('itemType')!.valid">
+            Please enter a valid Item Type
+          </mat-error>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Quantity</mat-label>
+          <!-- <label for="first_name" class="form-label">First Name</label> -->
+          <input
+            matInput
+            type="number"
+            id="quantity"
+            formControlName="quantity"
+          />
+          <mat-error *ngIf="!workItemForm.get('quantity')!.valid">
+            Please enter a valid Quantity
+          </mat-error>
+        </mat-form-field>
+      </td>
+    </tr>
+  </table>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Message To Recipient</mat-label>
+
+    <textarea
+      matInput
+      type="text"
+      id="massageToRecipient"
+      formControlName="massageToRecipient"
+    ></textarea>
+    <mat-error *ngIf="!workItemForm.get('massageToRecipient')!.valid">
+      Please enter a valid Meassage
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Item Description</mat-label>
+
+    <textarea
+      matInput
+      type="text"
+      id="itemDescription"
+      formControlName="itemDescription"
+    ></textarea>
+    <mat-error *ngIf="!workItemForm.get('itemDescription')!.valid">
+      Please enter a valid Item Description
+    </mat-error>
+  </mat-form-field>
+
+  <table>
+    <tr>
+      <td>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Collection Country</mat-label>
+          <!-- <label for="first_name" class="form-label">First Name</label> -->
+          <input
+            matInput
+            type="text"
+            id="collectionCountry"
+            formControlName="collectionCountry"
+          />
+          <mat-error *ngIf="!workItemForm.get('collectionCountry')!.valid">
+            Please enter a valid Country
+          </mat-error>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Origin Harbor Location</mat-label>
+          <!-- <label for="first_name" class="form-label">First Name</label> -->
+          <input
+            matInput
+            type="text"
+            id="originHarborLocation"
+            formControlName="originHarborLocation"
+          />
+          <mat-error *ngIf="!workItemForm.get('originHarborLocation')!.valid">
+            Please enter a valid Harbor
+          </mat-error>
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>destinationCountry</mat-label>
+          <!-- <label for="first_name" class="form-label">First Name</label> -->
+          <input
+            matInput
+            type="text"
+            id="destinationCountry"
+            formControlName="destinationCountry"
+          />
+          <mat-error *ngIf="!workItemForm.get('destinationCountry')!.valid">
+            Please enter a valid Country
+          </mat-error>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Selected Harbour Location</mat-label>
+          <!-- <label for="first_name" class="form-label">First Name</label> -->
+          <input
+            matInput
+            type="text"
+            id="selectedHarborLocations"
+            formControlName="selectedHarborLocations"
+          />
+          <mat-error
+            *ngIf="!workItemForm.get('selectedHarborLocations')!.valid"
+          >
+            Please enter a valid Harbor
+          </mat-error>
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <mat-form-field appearance="fill" class="example-full-width">
+          <mat-label>Shipping Date</mat-label>
+          <input
+            matInput
+            [min]="minDate"
+            [matDatepicker]="picker"
+            id="shippingDate"
+            formControlName="shippingDate"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error
+            *ngIf="!workItemForm.get('selectedHarborLocations')!.valid"
+          >
+            Please enter a valid Shippig Date
+          </mat-error>
+        </mat-form-field>
+      </td>
+
+      <td>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Amount</mat-label>
+          <!-- <label for="first_name" class="form-label">First Name</label> -->
+          <input matInput type="number" id="amount" formControlName="amount" />
+          <mat-error *ngIf="!workItemForm.get('amount')!.valid">
+            Please enter a valid Amount
+          </mat-error>
+        </mat-form-field>
+      </td>
+    </tr>
+  </table>
+
+  <button type="submit" class="btn btn-primary" [disabled]="!workItemForm.valid">
+    {{ isCreating ? "Create" : "Update" }}
+  </button>
+</form>

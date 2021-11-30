@@ -1,0 +1,102 @@
+<mat-form-field>
+  <mat-label>Filter</mat-label>
+  <input matInput placeholder="Search by name" (keyup)="applyFilter($event)" />
+</mat-form-field>
+
+<div>
+  <table mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="workItemId">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+      <td mat-cell *matCellDef="let row">{{ row.workItemId }}</td>
+    </ng-container>
+    <ng-container matColumnDef="itemName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <td mat-cell *matCellDef="let row">{{ row.itemName }}</td>
+    </ng-container>
+    <ng-container matColumnDef="itemType">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Item Type</th>
+      <td mat-cell *matCellDef="let row">{{ row.itemType }}</td>
+    </ng-container>
+    <ng-container matColumnDef="shippingDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Shipping Date</th>
+      <td mat-cell *matCellDef="let row">{{ row.shippingDate }}</td>
+    </ng-container>
+    <ng-container matColumnDef="quantity">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Quantity</th>
+      <td mat-cell *matCellDef="let row">{{ row.quantity }}</td>
+    </ng-container>
+    <ng-container matColumnDef="amount">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Amount</th>
+      <td mat-cell *matCellDef="let row">{{ row.amount }}</td>
+    </ng-container>
+    <ng-container matColumnDef="collectionCountry">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        Collection Country
+      </th>
+      <td mat-cell *matCellDef="let row">{{ row.collectionCountry }}</td>
+    </ng-container>
+    <ng-container matColumnDef="destinationCountry">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        Destination Country
+      </th>
+      <td mat-cell *matCellDef="let row">{{ row.destinationCountry }}</td>
+    </ng-container>
+    <ng-container matColumnDef="terminal">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Terminal</th>
+      <td mat-cell *matCellDef="let row">
+        {{ row.terminal ? row.terminal.terminalName : "" }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="vehicle">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Vehicle</th>
+      <td mat-cell *matCellDef="let row">
+        {{ row.vehicle ? row.vehicle.vehicleNumber : "" }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Actions</th>
+      <td mat-cell *matCellDef="let row">
+        <button
+          mat-icon-button
+          [matMenuTriggerFor]="menu"
+          aria-label="Example icon-button with a menu"
+        >
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item [routerLink]="['workitem', row.workItemId]">
+            <mat-icon>open_in_new</mat-icon>
+            <span>Open</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>edit</mat-icon>
+            <span>Edit</span>
+          </button>
+          <button mat-menu-item (click)="deleteWorkItem(row.workItemId)">
+            <mat-icon>delete</mat-icon>
+            <span style="color: red">Delete</span>
+          </button>
+          <div *ngIf="isAdmin">
+            <button mat-menu-item>
+              <mat-icon>drive_eta</mat-icon>
+              <span>Allocate Vehicle</span>
+            </button>
+            <button mat-menu-item (click)="assignTerminal(row.workItemId)">
+              <mat-icon> location_on</mat-icon>
+              <span>Assign Terminal</span>
+            </button>
+          </div>
+        </mat-menu>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="columns"></tr>
+    <tr mat-row *matRowDef="let row; columns: columns"></tr>
+  </table>
+
+  <mat-paginator
+    [pageSizeOptions]="[2, 5, 10, 25, 100]"
+    [pageSize]="2"
+    [length]="workitems.length"
+    aria-label="Select page of users"
+  ></mat-paginator>
+</div>

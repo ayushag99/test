@@ -1,0 +1,86 @@
+main {
+  width: 100%;
+}
+h2 {
+  font-size: 2rem;
+  padding-left: 50px;
+  position: relative;
+}
+.mycontainer {
+  width: 100%;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: row;
+
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.mycontainer:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+.services {
+  padding-bottom: 50px;
+}
+
+.services .mycontainer {
+  width: 90%;
+}
+.services .mycontainer:nth-child(odd) > div:nth-child(odd) {
+  margin-right: 50px;
+}
+.services .mycontainer:nth-child(even) > div:nth-child(even) {
+  margin-right: 50px;
+}
+
+img {
+  height: 300px;
+  object-fit: contain;
+}
+
+p {
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: justify;
+}
+.about {
+  background: rgb(242, 242, 242);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 100px;
+}
+.about > h2 {
+  margin-top: 100px;
+}
+.about p {
+  width: 40%;
+}
+.about-mycontainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+h2::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 50px;
+  width: 50px;
+  border-bottom: 3px solid black;
+}
+/* .about-container{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+} */
+@media screen and (max-width: 1000px) {
+  .mycontainer {
+    flex-direction: column;
+    align-items: center;
+  }
+}

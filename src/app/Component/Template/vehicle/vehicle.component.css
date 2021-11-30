@@ -1,0 +1,22 @@
+table {
+    width: 100%;
+  }
+  .page {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+  .page > div {
+    width: 45%;
+  }
+  .page > div > img {
+    width: 100%;
+    object-fit: contain;
+  }
+  .filterInput {
+    width: 100%;
+  }
+  
