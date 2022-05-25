@@ -59,9 +59,50 @@ Configurations are in config directory.
 ## Routes
 
 <ol>
-    <li><div>
+
     
-    ### Post a pitch 
+   <li> ### Post a pitch </li>
+
+**POST**  `http://<server_url>/pitches`
+
+| Parameter      | Type   | Constraints                                                |
+| -------------- | ------ | ---------------------------------------------------------- |
+| `entrepreneur` | String | Value is required                                          |
+| `pitchTitle`   | String | Value is required                                          |
+| `pitchIdea`    | String | Value is required                                          |
+| `askAmount`    | Float  | Value is required                                          |
+| `equity`       | Float  | Value is required<br />Value should be in range 0 and 100. |
+
+If the above constraints are not fulfilled then, API will respond with **400** status code and below object.
+
+Eg: if equity is out of bounds.
+
+```json
+{
+  "message": "Invalid Request Body",
+  "data": [
+    {
+      "value": "132",
+      "msg": "Equity must be in range of 0 to 100%",
+      "param": "equity",
+      "location": "body"
+    }
+  ]
+}
+```
+
+On Success user will receive a **201** status code with id of the pitch.
+
+Eg:
+
+```json
+{
+  "id": "624b29e31996eb6883996cda"
+}
+```
+
+   
+   <li> ### Post a pitch </li>
 
 **POST**  `http://<server_url>/pitches`
 
@@ -104,7 +145,8 @@ Eg:
 
 
 
-    </div></li>
+
+
 </ol>
 
 
