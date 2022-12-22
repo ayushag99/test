@@ -1,6 +1,5 @@
 # Jumbotail GPS Tracking Application
 
-test
 
 ## Table of Contents
 
